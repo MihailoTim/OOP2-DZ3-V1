@@ -3,21 +3,22 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Vector;
 
-public class Svemir extends Canvas implements Runnable{
+public class Space extends Canvas implements Runnable{
 	
 	private Vector<NebeskoTelo> v;
 	private int sleepTime = 100;
 	Thread thread;
 	
-	Svemir(){
+	Space(){
 		v = new Vector<NebeskoTelo>();
 		setBackground(Color.BLACK);
 		thread = new Thread(this);
+		thread.setDaemon(true);
 	}
 	
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(Kometa.getColor());
+		g.setColor(Color.GRAY);
 		for(NebeskoTelo t:v)
 			t.paint(g);
 	}
@@ -28,7 +29,7 @@ public class Svemir extends Canvas implements Runnable{
 		try {
 			while(true) {
 				for(NebeskoTelo t:v)
-					t.setCenterY(5);
+					t.moveCenterY(5);
 				repaint();
 				thread.sleep(sleepTime);
 			}
@@ -44,7 +45,7 @@ public class Svemir extends Canvas implements Runnable{
 		thread.interrupt();
 	}
 	
-	public void dodaj(NebeskoTelo t) {
+	public void add(NebeskoTelo t) {
 		v.add(t);
 	}
 	

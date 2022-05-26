@@ -5,7 +5,7 @@ import java.awt.Shape;
 
 public abstract class Objekat implements Cloneable {
 	protected int centerX,centerY;
-	protected static Color color;
+	protected Color color;
 	
 	public Objekat(int x, int y, Color c) {
 		this.centerX = x;
@@ -17,7 +17,7 @@ public abstract class Objekat implements Cloneable {
 		return centerX;
 	}
 
-	public void setCenterX(int delta) {
+	public void moveCenterX(int delta) {
 		this.centerX += delta;
 	}
 
@@ -25,12 +25,8 @@ public abstract class Objekat implements Cloneable {
 		return centerY;
 	}
 
-	public void setCenterY(int delta) {
+	public void moveCenterY(int delta) {
 		this.centerY += delta;
-	}
-	
-	public static Color getColor() {
-		return color;
 	}
 	
 	public Objekat clone() {

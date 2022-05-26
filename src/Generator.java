@@ -2,11 +2,12 @@
 public class Generator implements Runnable{
 	Thread thread;
 	private int sleepTime = 900;
-	Svemir svemir;
+	Space space;
 	
-	Generator(Svemir s){
+	Generator(Space s){
 		thread = new Thread(this);
-		svemir = s;
+		thread.setDaemon(true);
+		space = s;
 	}
 
 	@Override
@@ -15,7 +16,7 @@ public class Generator implements Runnable{
 			while(true) {
 				int xcoord = (int)(Math.random()*200);
 				int radius = (int)(Math.random()*20) + 10;
-				svemir.dodaj(new Kometa(xcoord, 0, radius));
+				space.add(new Comet(xcoord, 0, radius));
 				thread.sleep(900);
 			}
 		}

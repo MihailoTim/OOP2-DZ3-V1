@@ -1,37 +1,19 @@
 import java.awt.BorderLayout;
 import java.awt.Button;
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Panel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class Simulator extends Frame{
 	
-	private int windowWidth = 200;
-	private int windowHeight = 400;
+	private final int windowWidth = 200;
+	private final int windowHeight = 400;
 	private Button start = new Button("Pokreni!");
-	private Svemir svemir = new Svemir();
-	private Generator generator = new Generator(svemir);
-	private Panel buttonPane = new Panel();
-	
-	private void populateWindow() {
-		
-		start.addActionListener((ae) ->{
-			start.setEnabled(false);
-			svemir.start();
-			generator.start();
-		});
-			
-		buttonPane.add(start);
-		svemir.setBackground(Color.BLACK);
-		add(buttonPane, BorderLayout.SOUTH);
-		add(svemir, BorderLayout.CENTER);
-		svemir.dodaj(new Kometa(100,100,20));
-	}
+	private Space space = new Space();
+	private Generator generator = new Generator(space);
+	private Panel buttonPanel = new Panel();
 	
 	public Simulator(){
 		setBounds(700, 200, windowWidth, windowHeight);
@@ -41,16 +23,27 @@ public class Simulator extends Frame{
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent arg0) {
-				// setVisible(false);
 				dispose();
 			}
 		});
-
 		
 		populateWindow();
-	
 		
 		setVisible(true);
+	}
+	
+	private void populateWindow() {
+		
+		start.addActionListener((ae) ->{
+			start.setEnabled(false);
+			space.start();
+			generator.start();
+		});
+			
+		buttonPanel.add(start);
+		space.setBackground(Color.BLACK);
+		add(buttonPanel, BorderLayout.SOUTH);
+		add(space, BorderLayout.CENTER);
 	}
 	
 	public static void main(String[] args) {

@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Kometa extends NebeskoTelo {
+public class Comet extends NebeskoTelo {
 	
 	private double rotationAngle = 72 * 2 * Math.PI / 360;
 	private int referencePointX = this.centerX;
@@ -9,7 +9,7 @@ public class Kometa extends NebeskoTelo {
 	private int[] xpoints = new int[5];
 	private int[] ypoints = new int[5];
 	
-	public Kometa(int x, int y, int r) {
+	public Comet(int x, int y, int r) {
 		super(x, y, Color.GRAY, r);
 		double randAngle = Math.random() * 360;
 		int newRefX = rotateX(referencePointX, referencePointY, randAngle);
@@ -17,10 +17,6 @@ public class Kometa extends NebeskoTelo {
 		referencePointX = newRefX;
 		referencePointY = newRefY;
 		generatePoints();
-	}
-	
-	public static Color getColor() {
-		return Color.GRAY;
 	}
 	
 	private int rotateX(int refX, int refY, double angle) {
@@ -55,7 +51,7 @@ public class Kometa extends NebeskoTelo {
 	}
 	
 	@Override
-	public void setCenterY(int delta) {
+	public void moveCenterY(int delta) {
 		centerY+=delta;
 		for(int i=0;i<5;i++)
 			ypoints[i]+=delta;
